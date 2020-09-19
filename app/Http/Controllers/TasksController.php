@@ -68,17 +68,20 @@ class TasksController extends Controller
              
         ]);
         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
-        $request->user()->tasks()->create([
+       
+           $request->user()->tasks()->create([
         
          'content' => $request->content,
          'status'  => $request->status,
+       
+          
          ]);
        
         
         
        
         
-        
+     
         
         // トップページへリダイレクトさせる
         return redirect('/');
@@ -135,21 +138,25 @@ class TasksController extends Controller
 
         
         // idの値でタスクを検索して取得
+     
+        //$task = Task::findOrFail($request,$id);
         $task = Task::findOrFail($id);
         // タスクを更新
-        $task->status = $request->status;
-        $task->content = $request->content;
-        $task->user_id = $request->user_id;
-        $task->save();
-
-        // トップページへリダイレクトさせる
+        /*
+        $request->tasks()->update([
+         'content' => $request->content,
+         'status'  => $request->status,
+       ]);    // トップページへリダイレクトさせる
+       */
+       $task->update([
+         'content' => $request->content,
+         'status'  => $request->status,
+       ]);  
+    
          return redirect('/');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     /**
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
