@@ -96,13 +96,16 @@ class TasksController extends Controller
     public function show($id)
     {
         $task = Task::findOrFail($id);
-
+        if (\Auth::id() === $task->user_id) {
+            
         // メッセージ詳細ビューでそれを表示
         return view('tasks.show', [
             'task' => $task,
-    ]);//
+           
+    ]);
+    return redirect('/');  //
     }
-
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -115,11 +118,13 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
 
         // メッセージ編集ビューでそれを表示
+        if (\Auth::id() === $task->user_id) {
         return view('tasks.edit', [
             'task' => $task,
-        ]);   //
+        ]); 
+        return redirect('/');  //
     }
-
+}
     /**
      * Update the specified resource in storage.
      *
@@ -148,6 +153,7 @@ class TasksController extends Controller
          'status'  => $request->status,
        ]);    // トップページへリダイレクトさせる
        */
+    if (\Auth::id() === $task->user_id) {
        $task->update([
          'content' => $request->content,
          'status'  => $request->status,
@@ -155,7 +161,7 @@ class TasksController extends Controller
     
          return redirect('/');
     }
-
+}
      /**
      * @return \Illuminate\Http\Response
      */
