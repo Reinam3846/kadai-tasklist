@@ -77,12 +77,6 @@ class TasksController extends Controller
           
          ]);
        
-        
-        
-       
-        
-     
-        
         // トップページへリダイレクトさせる
         return redirect('/');
     }
@@ -101,10 +95,9 @@ class TasksController extends Controller
         // メッセージ詳細ビューでそれを表示
         return view('tasks.show', [
             'task' => $task,
-           
-    ]);
-    return redirect('/');
-    }
+        ]);
+        }
+        return redirect('/');
     }
     /**
      * Show the form for editing the specified resource.
@@ -122,9 +115,10 @@ class TasksController extends Controller
         return view('tasks.edit', [
             'task' => $task,
         ]); 
+        }
         return redirect('/');  //
     }
-}
+    
     /**
      * Update the specified resource in storage.
      *
@@ -158,9 +152,9 @@ class TasksController extends Controller
          'content' => $request->content,
          'status'  => $request->status,
        ]);  
-    
+       }
          return redirect('/');
-    }
+    
 }
      /**
      * @return \Illuminate\Http\Response
