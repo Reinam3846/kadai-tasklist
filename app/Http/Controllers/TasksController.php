@@ -103,7 +103,7 @@ class TasksController extends Controller
             'task' => $task,
            
     ]);
-    return redirect('/');  //
+    return redirect('/');
     }
     }
     /**
